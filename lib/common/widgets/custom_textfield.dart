@@ -20,7 +20,9 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
       ),
-      validator: (val) {},
+      validator: (val) {
+        return null;
+      },
     );
   }
 }
