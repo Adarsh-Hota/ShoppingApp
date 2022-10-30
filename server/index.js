@@ -7,9 +7,7 @@ const CLUSTER_URL = require('./secrets.js');
 const PORT = 3000;
 const app = express();
 
-//middleware
-app.use(authRouter);
-
+//Connecting to the MongoDB cluster
 mongoose.connect(CLUSTER_URL)
     .then(() => {
         console.log('Connection successful');
@@ -18,6 +16,11 @@ mongoose.connect(CLUSTER_URL)
         console.log(e);
     })
 
+//middleware
+app.use(express.json());
+app.use(authRouter);
+
+//listening to local host at given port
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`express application running at ${PORT}`)
 });
