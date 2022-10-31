@@ -46,6 +46,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-
-# secret file
+# secret files
+/lib/constants/secrets.dart
 /server/secrets.js
