@@ -37,11 +37,13 @@ class _AuthScreenState extends State<AuthScreen> {
 
   Future<void> userSignUp(
     BuildContext context,
-    String name,
-    String email,
-    String password,
   ) async {
-    await authService.userSignUp(context, name, email, password);
+    await authService.userSignUp(
+      context: context,
+      name: _nameController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
   }
 
   @override
@@ -119,12 +121,11 @@ class _AuthScreenState extends State<AuthScreen> {
                             CustomButton(
                               text: 'Sign Up',
                               onTap: () {
-                                userSignUp(
-                                  context,
-                                  _nameController.text,
-                                  _emailController.text,
-                                  _passwordController.text,
-                                );
+                                if (_signUpFormKey.currentState!.validate()) {
+                                  userSignUp(
+                                    context,
+                                  );
+                                }
                               },
                             ),
                             const SizedBox(

@@ -1,12 +1,13 @@
 const express = require('express');
 const authRouter = express.Router();
 const bcryptjs = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-const User = require('../models/user');
-
+const User = require('../models/userSchema');
+const { PRIVATE_KEY } = require('../secrets');
 
 authRouter
-    .post('/auth/signup', async (req, res) => {
+    .post('/auth/signUp', async (req, res) => {
         try {
             const { name, email, password } = req.body;
 
@@ -31,6 +32,40 @@ authRouter
                 .status(200)
                 .json({ user: user });
 
+        } catch (error) {
+            return res
+                .status(500)
+                .json({ error: error.message })
+
+        }
+
+    })
+
+authRouter
+    .post('/auth/signIn', async (req, res) => {
+        try {
+            const { email, password } = req.body;
+
+            const user = await User.findOne({ email: email });
+            if (!user) {
+                return res
+                    .status(400)
+                    .json({ msg: 'User with same email already exists' });
+            }
+            
+            const isMatch = await bcryptjs.compare(password, user.password);
+            if (!isMatch) {
+                return res
+                    .status(400)
+                    .json({ msg: 'Incorrect password' });
+
+            }
+
+            const token = await jwt.sign({ id: user._id }, PRIVATE_KEY);
+            return res
+                .status(200)
+                .json({ token: token, ...user._doc });
+                
         } catch (error) {
             return res
                 .status(500)

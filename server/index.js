@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 const authRouter = require('./routes/auth.js');
-const CLUSTER_URL = require('./secrets.js');
+const {CLUSTER_URL} = require('./secrets.js');
 
 const PORT = 3000;
 const app = express();
@@ -12,7 +12,7 @@ mongoose.connect(CLUSTER_URL)
     .then(() => {
         console.log('Connection successful');
     })
-    .catch(() => {
+    .catch((e) => {
         console.log(e);
     })
 
