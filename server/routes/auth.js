@@ -50,7 +50,7 @@ authRouter
             if (!user) {
                 return res
                     .status(400)
-                    .json({ msg: 'User with same email already exists' });
+                    .json({ msg: 'Entered email doesn\'t exist' });
             }
             
             const isMatch = await bcryptjs.compare(password, user.password);

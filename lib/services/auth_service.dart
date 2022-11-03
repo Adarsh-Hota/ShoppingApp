@@ -1,10 +1,15 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:your_shop_app/constants/response_handling.dart';
 import 'package:your_shop_app/constants/secrets.dart';
 import 'package:your_shop_app/constants/utils.dart';
-
+import 'package:your_shop_app/features/home/screens/home_screen.dart';
 import 'package:your_shop_app/models/user.dart';
+import 'package:your_shop_app/providers/user_provider.dart';
 
 class AuthService {
   Future<void> userSignUp({
@@ -40,10 +45,63 @@ class AuthService {
       responseHandler(
         response: res,
         context: context,
-        onSuccess: () {
+        onSuccess: () async {
           showSnackBar(
             context: context,
             text: 'Account created successfully!',
+          );
+          
+          await userSignIn(
+            context: context,
+            email: email,
+            password: password,
+          );
+        },
+      );
+    } catch (e) {
+      showSnackBar(
+        context: context,
+        text: e.toString(),
+      );
+    }
+  }
+
+  Future<void> userSignIn({
+    required BuildContext context,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      Uri signInUri = Uri.parse('$myIpUrl/auth/signIn');
+      http.Response res = await http.post(
+        signInUri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode({
+          'email': email,
+          'password': password,
+        }),
+      );
+
+      responseHandler(
+        response: res,
+        context: context,
+        onSuccess: () async {
+          Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.setString(
+            'x-auth-token',
+            jsonDecode(res.body)['token'],
+          );
+          showSnackBar(
+            context: context,
+            text: 'Sign in successful',
+          );
+          await Navigator.pushNamedAndRemoveUntil(
+            context,
+            HomeScreen.routeName,
+            (route) => false,
           );
         },
       );
