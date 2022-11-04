@@ -50,7 +50,7 @@ class AuthService {
             context: context,
             text: 'Account created successfully!',
           );
-          
+
           await userSignIn(
             context: context,
             email: email,
@@ -105,6 +105,42 @@ class AuthService {
           );
         },
       );
+    } catch (e) {
+      showSnackBar(
+        context: context,
+        text: e.toString(),
+      );
+    }
+  }
+
+  Future<void> getUserDetails({
+    required BuildContext context,
+  }) async {
+    try {
+      //Check if token already exists or not
+      final prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('x-auth-token');
+      if (token == null) {
+        return;
+      }
+
+      //If token exists, check its validity and get response
+      Uri userDetailsUri = Uri.parse(myIpUrl);
+      http.Response userResponse = await http.get(
+        userDetailsUri,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': token,
+        },
+      );
+
+      //If response is right then set user provider value
+      if (userResponse.statusCode == 200) {
+        Provider.of<UserProvider>(context).setUser(userResponse.body);
+      }
+
+      //At the end, if token exists, userProvider user value would be set and not, if it doesn't
+      return;
     } catch (e) {
       showSnackBar(
         context: context,
