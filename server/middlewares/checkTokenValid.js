@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { PRIVATE_KEY } = require('../secrets');
 
-const getUserDetails = async (req, res, next) => {
+const checkTokenValid = async (req, res, next) => {
     try {
         const token = req.header('x-auth-token');
         if (!token) {
@@ -31,4 +31,4 @@ const getUserDetails = async (req, res, next) => {
     }
 }
 
-module.exports = getUserDetails;
+module.exports = checkTokenValid;

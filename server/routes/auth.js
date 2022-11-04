@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/userSchema');
 const { PRIVATE_KEY } = require('../secrets');
-const getUserDetails = require('../middlewares/getUserDetails');
+const checkTokenValid = require('../middlewares/checkTokenValid');
 
 
 const authRouter = express.Router();
@@ -75,39 +75,8 @@ authRouter
 
     })
 
-//api for checking if user token is valid
-authRouter
-    .post('/auth/checkTokenValid', async (req, res) => {
-        try {
-            const token = req.header('x-auth-token');
-
-            //check if token is valid
-            const decodedToken = jwt.verify(token, PRIVATE_KEY);
-            if (!decodedToken) {
-                return res
-                    .json(false);
-            }
-
-            //check if user exists in the database
-            const user = User.findById(decodedToken.id);
-            if (!user) {
-                return res
-                    .json(false);
-            }
-
-            return res
-                .json(true);
-
-        } catch (error) {
-            return res
-                .status(500)
-                .json({ error: error.message })
-        }
-
-    })
-
 //api for getting user details 
-authRouter.get('/', getUserDetails, async (req, res) => {
+authRouter.get('/', checkTokenValid, async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
         return res
