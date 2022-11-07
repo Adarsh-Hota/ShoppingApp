@@ -21,7 +21,7 @@ const checkTokenValid = async (req, res, next) => {
                 });
         }
 
-        req.user = decodedToken.id;
+        req.userId = decodedToken.id;
         req.token = token;
         next();
     } catch (error) {

@@ -78,7 +78,7 @@ authRouter
 //api for getting user details 
 authRouter.get('/', checkTokenValid, async (req, res) => {
     try {
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.userId);
         return res
             .status(200)
             .json({

@@ -136,7 +136,8 @@ class AuthService {
 
       //If response is right then set user provider value
       if (userResponse.statusCode == 200) {
-        Provider.of<UserProvider>(context).setUser(userResponse.body);
+        Provider.of<UserProvider>(context, listen: false)
+            .setUser(userResponse.body);
       }
 
       //At the end, if token exists, userProvider user value would be set and not, if it doesn't
