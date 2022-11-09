@@ -1,7 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:your_shop_app/constants/global_variables.dart';
-import 'package:your_shop_app/features/home/widgets/account_page.dart';
+import 'package:your_shop_app/features/account/screens/account_page.dart';
 import 'package:your_shop_app/features/home/widgets/cart_page.dart';
 import 'package:your_shop_app/features/home/widgets/home_main_page.dart';
 
@@ -33,6 +33,43 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50),
+        child: AppBar(
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: GlobalVariables.appBarGradient,
+            ),
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  'assets/images/amazon_in.png',
+                  width: 120,
+                  height: 45,
+                  color: Colors.black,
+                ),
+              ),
+              Row(
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(Icons.notifications_outlined),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Icon(Icons.search),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _page,
