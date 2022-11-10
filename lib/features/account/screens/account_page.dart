@@ -41,10 +41,9 @@ class AccountPage extends StatelessWidget {
             ],
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.all(4.0),
-          child: SizedBox(
-            height: 320,
+        const Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
             child: UserOrders(),
           ),
         ),

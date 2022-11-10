@@ -18,7 +18,6 @@ class HelloUser extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(
           left: 15,
-          top: 8,
           right: 8,
           bottom: 8,
         ),

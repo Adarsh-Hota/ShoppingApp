@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:your_shop_app/common/widgets/single_product.dart';
-import 'package:your_shop_app/constants/global_variables.dart';
 
 class UserOrders extends StatefulWidget {
   const UserOrders({Key? key}) : super(key: key);
