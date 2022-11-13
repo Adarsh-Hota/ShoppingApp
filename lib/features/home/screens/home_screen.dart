@@ -1,9 +1,10 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart';
+
 import 'package:your_shop_app/constants/global_variables.dart';
 import 'package:your_shop_app/features/account/screens/account_page.dart';
 import 'package:your_shop_app/features/account/widgets/account_app_bar.dart';
-import 'package:your_shop_app/features/home/widgets/cart_page.dart';
+import 'package:your_shop_app/features/cart/screens/cart_page.dart';
 import 'package:your_shop_app/features/home/widgets/home_app_bar.dart';
 import 'package:your_shop_app/features/home/widgets/home_main_page.dart';
 
