@@ -13,7 +13,6 @@ class CarouselImageBox extends StatelessWidget {
             (imageLink) => Image.network(
               imageLink,
               height: 200,
-         
               fit: BoxFit.cover,
             ),
           )
