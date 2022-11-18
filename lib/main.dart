@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:your_shop_app/constants/global_variables.dart';
+import 'package:your_shop_app/features/admin/screens/admin_screen.dart';
 import 'package:your_shop_app/features/auth/screens/auth_screen.dart';
 import 'package:your_shop_app/features/home/screens/home_screen.dart';
 import 'package:your_shop_app/providers/user_provider.dart';
@@ -43,6 +44,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).getUser;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'YourShop App',
@@ -59,8 +61,8 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       onGenerateRoute: ((settings) => generateRoute(settings)),
-      home: Provider.of<UserProvider>(context).getUser.token.isNotEmpty
-          ? const HomeScreen()
+      home: user.token.isNotEmpty
+          ? (user.type == 'admin' ? const AdminScreen() : const HomeScreen())
           : const AuthScreen(),
     );
   }
