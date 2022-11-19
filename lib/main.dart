@@ -7,7 +7,7 @@ import 'package:your_shop_app/features/auth/screens/auth_screen.dart';
 import 'package:your_shop_app/features/home/screens/home_screen.dart';
 import 'package:your_shop_app/providers/user_provider.dart';
 import 'package:your_shop_app/router.dart';
-import 'package:your_shop_app/services/auth_service.dart';
+import 'package:your_shop_app/features/auth/services/auth_service.dart';
 
 void main() {
   runApp(

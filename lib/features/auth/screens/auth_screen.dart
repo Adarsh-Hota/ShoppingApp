@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:your_shop_app/common/widgets/custom_button.dart';
 import 'package:your_shop_app/common/widgets/custom_textfield.dart';
 import 'package:your_shop_app/constants/global_variables.dart';
-import 'package:your_shop_app/services/auth_service.dart';
+import 'package:your_shop_app/features/auth/services/auth_service.dart';
 
 enum Auth {
   signIn,
