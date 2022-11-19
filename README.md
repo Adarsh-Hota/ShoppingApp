@@ -30,6 +30,17 @@ The objective is to make a shopping app like Amazon app with frontend using Flut
   </tr>
  </table>
 
+ <table>
+  <tr>
+    <td>Add Products Page</td>
+     <td>Add Products Page Scrolled</td>
+  </tr>
+  <tr>
+    <td> <img src="/readMeImages/add_products_page.png" title="AddProductsPage" width="250" height="460"/> </td>
+    <td><img src="/readMeImages/add_products_page_scrolled.png" title="AddProductsPageScrolled" width="250" height="460"/></td>
+  </tr>
+ </table>
+
 # Tech Stack Used
 
 - Flutter
