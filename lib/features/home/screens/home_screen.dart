@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return AppBar();
   }
 
-  void updatePage(index) {
+  void _updatePage(index) {
     setState(() {
       _page = index;
     });
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
         unselectedItemColor: GlobalVariables.unselectedNavBarColor,
         backgroundColor: GlobalVariables.backgroundColor,
         iconSize: 28,
-        onTap: (index) => updatePage(index),
+        onTap: _updatePage,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Container(

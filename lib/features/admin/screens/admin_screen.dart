@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:your_shop_app/constants/global_variables.dart';
+import 'package:your_shop_app/features/admin/widgets/add_products_screen.dart';
 import 'package:your_shop_app/features/admin/widgets/admin_home_app_bar.dart';
 import 'package:your_shop_app/features/admin/widgets/products_widget.dart';
 
@@ -31,10 +32,14 @@ class _AdminScreenState extends State<AdminScreen> {
     return AppBar();
   }
 
-  void updatePage(index) {
+  void _updatePage(index) {
     setState(() {
       _page = index;
     });
+  }
+
+  void navigateToAddProductsScreen() {
+    Navigator.pushNamed(context, AddProductsScreen.routeName);
   }
 
   @override
@@ -47,7 +52,7 @@ class _AdminScreenState extends State<AdminScreen> {
       body: pages[_page],
       floatingActionButton: _page == 0
           ? FloatingActionButton(
-              onPressed: () {},
+              onPressed: navigateToAddProductsScreen,
               tooltip: 'Add a product',
               child: const Icon(Icons.add),
             )
@@ -59,7 +64,7 @@ class _AdminScreenState extends State<AdminScreen> {
         unselectedItemColor: GlobalVariables.unselectedNavBarColor,
         backgroundColor: GlobalVariables.backgroundColor,
         iconSize: 28,
-        onTap: (index) => updatePage(index),
+        onTap: _updatePage,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Container(
