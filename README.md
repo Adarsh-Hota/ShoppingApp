@@ -33,11 +33,13 @@ The objective is to make a shopping app like Amazon app with frontend using Flut
  <table>
   <tr>
     <td>Add Products Page</td>
-     <td>Add Products Page Scrolled</td>
+    <td>Add Products Page Scrolled</td>
+    <td>Add Photo Feature</td>
   </tr>
   <tr>
     <td> <img src="/readMeImages/add_products_page.png" title="AddProductsPage" width="250" height="460"/> </td>
     <td><img src="/readMeImages/add_products_page_scrolled.png" title="AddProductsPageScrolled" width="250" height="460"/></td>
+    <td> <img src="/readMeImages/add_photo_feature.png" title="AddPhotoFeature" width="250" height="460"/></td>
   </tr>
  </table>
 
