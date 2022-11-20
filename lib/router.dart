@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:your_shop_app/features/admin/widgets/add_products_screen.dart';
+import 'package:your_shop_app/features/admin_add_product/screens/add_products_screen.dart';
 import 'features/home/screens/home_screen.dart';
 import 'package:your_shop_app/features/auth/screens/auth_screen.dart';
 

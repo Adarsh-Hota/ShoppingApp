@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:your_shop_app/constants/global_variables.dart';
-import 'package:your_shop_app/features/admin/widgets/add_products_screen.dart';
+import 'package:your_shop_app/features/admin_add_product/screens/add_products_screen.dart';
 import 'package:your_shop_app/features/admin/widgets/admin_home_app_bar.dart';
 import 'package:your_shop_app/features/admin/widgets/products_widget.dart';
 
