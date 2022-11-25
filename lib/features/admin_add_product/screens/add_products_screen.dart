@@ -7,6 +7,7 @@ import 'package:your_shop_app/common/widgets/custom_button.dart';
 import 'package:your_shop_app/common/widgets/custom_textfield.dart';
 import 'package:your_shop_app/constants/global_variables.dart';
 import 'package:your_shop_app/features/admin_add_product/services/add_image.dart';
+import 'package:your_shop_app/features/admin_add_product/services/admin_services.dart';
 
 class AddProductsScreen extends StatefulWidget {
   static const String routeName = '/add_product';
@@ -29,7 +30,9 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
     'Books',
     'Fashion',
   ];
-  String dropdownvalue = 'Mobiles';
+  final AdminServices adminServices = AdminServices();
+  final _sellProductFormKey = GlobalKey<FormState>();
+  String dropDownValue = 'Mobiles';
   List<File> selectedProductimages = [];
 
   @override
@@ -48,6 +51,22 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
         selectedProductimages = res;
       },
     );
+  }
+
+  void sellProduct() {
+    if (_sellProductFormKey.currentState!.validate() &&
+        selectedProductimages.isNotEmpty) {
+      adminServices.sellProduct(
+        context: context,
+        name: productNameController.text,
+        description: descriptionController.text,
+        price: double.parse(priceController.text),
+        quantity: double.parse(quantityController.text),
+        category: dropDownValue,
+        images: selectedProductimages,
+      );
+    }
+    return;
   }
 
   @override
@@ -70,6 +89,7 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
       ),
       body: SingleChildScrollView(
         child: Form(
+          key: _sellProductFormKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
@@ -157,7 +177,7 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: DropdownButton(
-                    value: dropdownvalue,
+                    value: dropDownValue,
                     icon: const Icon(Icons.keyboard_arrow_down),
                     items: productCategories.map(
                       (String category) {
@@ -170,7 +190,7 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                     onChanged: (String? newValue) {
                       setState(
                         () {
-                          dropdownvalue = newValue!;
+                          dropDownValue = newValue!;
                         },
                       );
                     },
@@ -181,7 +201,7 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                 ),
                 CustomButton(
                   text: 'Sell',
-                  onTap: () {},
+                  onTap: sellProduct,
                 ),
                 const SizedBox(
                   height: 10,
