@@ -2,7 +2,7 @@ const express = require('express');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-const User = require('../models/userSchema');
+const UserModelInstance = require('../models/userSchema');
 const { PRIVATE_KEY } = require('../secrets');
 const checkTokenValid = require('../middlewares/checkTokenValid');
 
@@ -15,7 +15,7 @@ authRouter
         try {
             const { name, email, password } = req.body;
 
-            const existingUser = await User.findOne({ email });
+            const existingUser = await UserModelInstance.findOne({ email });
             if (existingUser) {
                 return res
                     .status(400)
@@ -23,7 +23,7 @@ authRouter
             }
 
             const hashedPassword = await bcryptjs.hash(password, 9);
-            let user = new User({
+            let user = new UserModelInstance({
                 name: name,
                 email: email,
                 password: hashedPassword,
@@ -48,7 +48,7 @@ authRouter
         try {
             const { email, password } = req.body;
 
-            const user = await User.findOne({ email: email });
+            const user = await UserModelInstance.findOne({ email: email });
             if (!user) {
                 return res
                     .status(400)
@@ -78,7 +78,7 @@ authRouter
 //api for getting user details 
 authRouter.get('/', checkTokenValid, async (req, res) => {
     try {
-        const user = await User.findById(req.userId);
+        const user = await UserModelInstance.findById(req.userId);
         return res
             .status(200)
             .json({

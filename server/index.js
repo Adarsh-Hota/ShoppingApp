@@ -1,8 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
+const adminRouter = require('./routes/admin.js');
 const authRouter = require('./routes/auth.js');
-const {CLUSTER_URL} = require('./secrets.js');
+const { CLUSTER_URL } = require('./secrets.js');
 
 const PORT = 3000;
 const app = express();
@@ -16,9 +17,10 @@ mongoose.connect(CLUSTER_URL)
         console.log(e);
     })
 
-//middleware
+//middlewares
 app.use(express.json());
 app.use(authRouter);
+app.use(adminRouter);
 
 //listening to local host at given port
 app.listen(PORT, '0.0.0.0', () => {
