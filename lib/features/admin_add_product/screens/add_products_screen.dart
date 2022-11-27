@@ -7,7 +7,7 @@ import 'package:your_shop_app/common/widgets/custom_button.dart';
 import 'package:your_shop_app/common/widgets/custom_textfield.dart';
 import 'package:your_shop_app/constants/global_variables.dart';
 import 'package:your_shop_app/features/admin_add_product/services/add_image.dart';
-import 'package:your_shop_app/features/admin_add_product/services/admin_services.dart';
+import 'package:your_shop_app/features/admin/services/admin_services.dart';
 
 class AddProductsScreen extends StatefulWidget {
   static const String routeName = '/add_product';

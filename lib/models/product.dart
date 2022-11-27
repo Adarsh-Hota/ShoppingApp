@@ -4,7 +4,7 @@ class Product {
   final String name;
   final String description;
   final double quantity;
-  final List<String> images;
+  final List<dynamic> images;
   final String category;
   final double price;
   String? id;
