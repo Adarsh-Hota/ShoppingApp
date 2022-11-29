@@ -36,10 +36,10 @@ class Product {
       id: map['_id'] ?? '',
       name: map['name'] ?? '',
       description: map['description'] ?? '',
-      quantity: map['quantity'] ?? 0.0,
-      images: map['images'] ?? '',
+      quantity: map['quantity'].toDouble() ?? 0.0,
+      images: map['images'] ?? [],
       category: map['category'] ?? '',
-      price: map['price'] ?? 0.0,
+      price: map['price'].toDouble() ?? 0.0,
     );
   }
 

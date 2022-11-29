@@ -97,10 +97,6 @@ class AdminServices {
         onSuccess: () {
           List<dynamic> productsList = jsonDecode(res.body)['products'];
           for (var i = 0; i < productsList.length; i++) {
-            productsList[i]['quantity'] =
-                productsList[i]['quantity'].toDouble();
-            productsList[i]['price'] = productsList[i]['price'].toDouble();
-
             products.add(
               Product.fromJson(
                 jsonEncode(productsList[i]),
