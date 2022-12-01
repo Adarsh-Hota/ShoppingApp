@@ -27,4 +27,26 @@ userRouter.get('/user/getCategoryProducts', checkTokenValid, async (req, res) =>
     }
 })
 
+//API for getting products based on the search query
+userRouter.get('/user/getSearchProducts/search/:searchQuery', checkTokenValid, async (req, res) => {
+    try {
+        const searchQuery = req.params.searchQuery;
+        const products = await ProductModel.find({
+            name: { $regex: searchQuery, $options: "i" }
+        });
+
+        res
+            .status(200)
+            .json({
+                products: products,
+            })
+
+    } catch (error) {
+        return res
+            .status(500)
+            .json({ error: error.message })
+
+    }
+})
+
 module.exports = userRouter;

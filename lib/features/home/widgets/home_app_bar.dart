@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:your_shop_app/constants/global_variables.dart';
+import 'package:your_shop_app/features/search/screens/search_screen.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({Key? key}) : super(key: key);
+
+  void navigateToSearchScreen(BuildContext context, String searchQuery) {
+    Navigator.pushNamed(
+      context,
+      SearchScreen.routeName,
+      arguments: {
+        'searchQuery': searchQuery,
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +35,9 @@ class HomeAppBar extends StatelessWidget {
               child: Material(
                 borderRadius: BorderRadius.circular(10),
                 elevation: 1,
-                child: TextField(
+                child: TextFormField(
+                  onFieldSubmitted: (searchQuery) =>
+                      navigateToSearchScreen(context, searchQuery),
                   decoration: InputDecoration(
                     prefixIcon: InkWell(
                       onTap: () {},
