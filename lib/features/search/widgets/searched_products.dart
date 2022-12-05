@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:your_shop_app/features/product_details/screens/product_details_screen.dart';
 import 'package:your_shop_app/features/search/widgets/stars_section.dart';
 import 'package:your_shop_app/models/product.dart';
 
@@ -9,6 +11,20 @@ class SearchedProduct extends StatelessWidget {
     Key? key,
     required this.product,
   }) : super(key: key);
+
+  void navigateToProductDetailsScreen(
+    BuildContext context,
+    Product currentProduct,
+  ) {
+    Navigator.pushNamed(
+      context,
+      ProductDetailsScreen.routeName,
+      arguments: {
+        'product': currentProduct,
+      },
+    );
+    return;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +97,28 @@ class SearchedProduct extends StatelessWidget {
                     maxLines: 2,
                     style: TextStyle(
                       color: Colors.teal,
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => navigateToProductDetailsScreen(
+                    context,
+                    product,
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.only(
+                      left: 8,
+                      top: 5,
+                      right: 8,
+                      bottom: 0,
+                    ),
+                    child: Text(
+                      'Go to details',
+                      style: TextStyle(
+                        color: Colors.teal,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
                     ),
                   ),
                 ),
