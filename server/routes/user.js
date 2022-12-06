@@ -49,4 +49,43 @@ userRouter.get('/user/getSearchProducts/search/:searchQuery', checkTokenValid, a
     }
 })
 
+//API for rating the product by the user
+userRouter.post('/user/addRating', checkTokenValid, async (req, res) => {
+    try {
+        const { productId: productId, rating: rating } = req.body;
+        let product = await ProductModel.findById(productId);
+
+        //remove the old user rating, if it exists
+        let ratingArray = product.rating;
+        for (let i = 0; i < ratingArray.length; i++) {
+            if (ratingArray[i]['userId'] == req.userId) {
+                ratingArray.splice(i, 1);
+                break;
+            }
+        }
+
+        //add the new user rating
+        newUserRating = {
+            'userId': req.userId,
+            'rating': rating,
+        }
+        ratingArray.push(newUserRating);
+        product.rating = ratingArray;
+        product = await product.save();
+
+        //send the response
+        res
+            .status(200)
+            .json({
+                'product': product,
+            })
+
+    } catch (error) {
+        return res
+            .status(500)
+            .json({ error: error.message })
+
+    }
+})
+
 module.exports = userRouter;

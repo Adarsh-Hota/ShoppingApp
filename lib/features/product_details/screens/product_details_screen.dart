@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:your_shop_app/common/widgets/custom_button.dart';
 import 'package:your_shop_app/constants/global_variables.dart';
+import 'package:your_shop_app/features/product_details/services/rating_service.dart';
 import 'package:your_shop_app/features/search/screens/search_screen.dart';
 import 'package:your_shop_app/models/product.dart';
 
@@ -21,6 +22,8 @@ class ProductDetailsScreen extends StatefulWidget {
 }
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  final RatingServices ratingServices = RatingServices();
+
   void navigateToSearchScreen(BuildContext context, String searchQuery) {
     Navigator.pushNamed(
       context,
@@ -195,7 +198,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             color: GlobalVariables.secondaryColor,
                           );
                         },
-                        onRatingUpdate: (double rating) {},
+                        onRatingUpdate: (double rating) {
+                          ratingServices.addRating(
+                            context: context,
+                            product: widget.product,
+                            rating: rating,
+                          );
+                        },
                       ),
                     ),
                   ],
