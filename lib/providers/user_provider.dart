@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/user.dart';
+import '../models/user_modal.dart';
 
 class UserProvider extends ChangeNotifier {
   User _user = User(

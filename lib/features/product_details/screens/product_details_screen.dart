@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
 import 'package:your_shop_app/common/widgets/custom_button.dart';
 import 'package:your_shop_app/constants/global_variables.dart';
 import 'package:your_shop_app/features/product_details/services/rating_service.dart';
 import 'package:your_shop_app/features/search/screens/search_screen.dart';
-import 'package:your_shop_app/models/product.dart';
+import 'package:your_shop_app/models/product_modal.dart';
+import 'package:your_shop_app/providers/user_provider.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   static const String routeName = 'product-details';
@@ -23,6 +25,30 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   final RatingServices ratingServices = RatingServices();
+
+  double avgProductRating = 0;
+  double userRating = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    final user = Provider.of<UserProvider>(context, listen: false).getUser;
+    double totalRating = 0;
+    for (int i = 0; i < widget.product.ratingsList!.length; i++) {
+      totalRating = totalRating + widget.product.ratingsList![i].rating;
+      print(user.id);
+      print(widget.product.ratingsList![i].userId);
+      if (widget.product.ratingsList![i].userId == user.id) {
+        userRating = widget.product.ratingsList![i].rating;
+      }
+    }
+    if (totalRating == 0) {
+      avgProductRating = 0;
+    } else {
+      avgProductRating = totalRating / widget.product.ratingsList!.length;
+    }
+  }
 
   void navigateToSearchScreen(BuildContext context, String searchQuery) {
     Navigator.pushNamed(
@@ -128,7 +154,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 child: RatingBarIndicator(
                   direction: Axis.horizontal,
                   itemCount: 5,
-                  rating: 4,
+                  rating: avgProductRating,
                   itemSize: 15,
                   itemBuilder: (context, _) {
                     return const Icon(
@@ -189,6 +215,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     Expanded(
                       flex: 4,
                       child: RatingBar.builder(
+                        initialRating: userRating,
                         minRating: 1,
                         itemSize: 30,
                         allowHalfRating: true,

@@ -4,7 +4,7 @@ import 'package:your_shop_app/constants/global_variables.dart';
 import 'package:your_shop_app/features/home/widgets/address_box.dart';
 import 'package:your_shop_app/features/search/services/search_services.dart';
 import 'package:your_shop_app/features/search/widgets/searched_products.dart';
-import 'package:your_shop_app/models/product.dart';
+import 'package:your_shop_app/models/product_modal.dart';
 
 class SearchScreen extends StatefulWidget {
   static const String routeName = '/searchScreen';

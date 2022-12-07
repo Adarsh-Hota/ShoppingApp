@@ -4,7 +4,7 @@ import 'package:your_shop_app/features/admin_add_product/screens/add_products_sc
 import 'package:your_shop_app/features/home/screens/category_deals_screen.dart';
 import 'package:your_shop_app/features/product_details/screens/product_details_screen.dart';
 import 'package:your_shop_app/features/search/screens/search_screen.dart';
-import 'package:your_shop_app/models/product.dart';
+import 'package:your_shop_app/models/product_modal.dart';
 import 'features/home/screens/home_screen.dart';
 import 'package:your_shop_app/features/auth/screens/auth_screen.dart';
 

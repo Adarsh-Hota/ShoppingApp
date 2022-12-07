@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:your_shop_app/constants/response_handling.dart';
 import 'package:your_shop_app/constants/secrets.dart';
 import 'package:your_shop_app/constants/utils.dart';
-import 'package:your_shop_app/models/product.dart';
+import 'package:your_shop_app/models/product_modal.dart';
 import 'package:your_shop_app/providers/user_provider.dart';
 
 class HomeServices {

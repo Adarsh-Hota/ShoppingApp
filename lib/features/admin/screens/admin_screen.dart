@@ -39,7 +39,9 @@ class _AdminScreenState extends State<AdminScreen> {
   }
 
   void navigateToAddProductsScreen() {
-    Navigator.pushNamed(context, AddProductsScreen.routeName);
+    Navigator.pushNamed(context, AddProductsScreen.routeName).then((value) {
+      setState(() {});
+    });
   }
 
   @override

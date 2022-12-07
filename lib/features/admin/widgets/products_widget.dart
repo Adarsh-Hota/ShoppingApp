@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:your_shop_app/common/widgets/single_product.dart';
 import 'package:your_shop_app/features/admin/services/admin_services.dart';
-import 'package:your_shop_app/models/product.dart';
+import 'package:your_shop_app/models/product_modal.dart';
 
 class ProductsScreen extends StatefulWidget {
   const ProductsScreen({Key? key}) : super(key: key);

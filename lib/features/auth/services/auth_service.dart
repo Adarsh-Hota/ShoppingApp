@@ -8,7 +8,7 @@ import 'package:your_shop_app/constants/response_handling.dart';
 import 'package:your_shop_app/constants/secrets.dart';
 import 'package:your_shop_app/constants/utils.dart';
 import 'package:your_shop_app/features/home/screens/home_screen.dart';
-import 'package:your_shop_app/models/user.dart';
+import 'package:your_shop_app/models/user_modal.dart';
 import 'package:your_shop_app/providers/user_provider.dart';
 
 class AuthService {

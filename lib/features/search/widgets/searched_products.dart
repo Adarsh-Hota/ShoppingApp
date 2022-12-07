@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:your_shop_app/features/product_details/screens/product_details_screen.dart';
 import 'package:your_shop_app/features/search/widgets/stars_section.dart';
-import 'package:your_shop_app/models/product.dart';
+import 'package:your_shop_app/models/product_modal.dart';
 
 class SearchedProduct extends StatelessWidget {
   final Product product;
@@ -28,6 +28,16 @@ class SearchedProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double avgProductRating = 0;
+    double totalRating = 0;
+    for (int i = 0; i < product.ratingsList!.length; i++) {
+      totalRating = totalRating + product.ratingsList![i].rating;
+    }
+    if (totalRating == 0) {
+      avgProductRating = 0;
+    } else {
+      avgProductRating = totalRating / product.ratingsList!.length;
+    }
     return Container(
       margin: const EdgeInsets.symmetric(
         horizontal: 10,
@@ -54,13 +64,13 @@ class SearchedProduct extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(
+                Padding(
+                  padding: const EdgeInsets.only(
                     left: 10,
                     top: 5,
                   ),
                   child: StarsSection(
-                    rating: 4,
+                    rating: avgProductRating,
                   ),
                 ),
                 Padding(
