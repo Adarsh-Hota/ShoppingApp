@@ -48,4 +48,42 @@ class HomeServices {
 
     return products;
   }
+
+  Future<Product> getDealOfTheDay({
+    required BuildContext context,
+  }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    Product product = Product(
+      name: '',
+      description: '',
+      quantity: 0.0,
+      images: [],
+      category: '',
+      price: 0.0,
+    );
+    try {
+      http.Response res = await http.get(
+        Uri.parse('$myIpUrl/user/dealOfTheDay'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.getUser.token,
+        },
+      );
+      product = jsonDecode(res.body)['product'];
+
+      responseHandler(
+        response: res,
+        context: context,
+        onSuccess: () {},
+      );
+
+      return product;
+    } catch (e) {
+      showSnackBar(
+        context: context,
+        text: e.toString(),
+      );
+    }
+    return product;
+  }
 }

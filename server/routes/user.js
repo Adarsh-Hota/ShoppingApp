@@ -88,4 +88,48 @@ userRouter.post('/user/addRating', checkTokenValid, async (req, res) => {
     }
 })
 
+//API for getting the deal of the day product
+userRouter.get('/user/dealOfTheDay', checkTokenValid, async (req, res) => {
+    try {
+        let productsList = await ProductModel.find({});
+
+        let sortedProductsList = productsList.sort((productOne, productTwo) => {
+            let productOneSum = 0;
+            let productOneAvg = 0;
+            for (let i = 0; i < productOne.rating.length; i++) {
+                productOneSum += productOne.rating[i].rating;
+            }
+            if (productOne.rating.length == 0) {
+                productOneAvg = 0;
+            } else {
+                productOneAvg = productOneSum / productOne.rating.length;
+            }
+
+            let productTwoSum = 0;
+            let productTwoAvg = 0;
+            for (let i = 0; i < productTwo.rating.length; i++) {
+                productTwoSum += productTwo.rating[i].rating;
+            }
+            if (productTwo.rating.length == 0) {
+                productTwoAvg = 0;
+            } else {
+                productTwoAvg = productTwoSum / productTwo.rating.length;
+            }
+
+            return productOneAvg < productTwoAvg ? 1 : -1;
+        })
+
+        return res
+            .status(200)
+            .json({
+                'product': sortedProductsList[0]
+            })
+    } catch (error) {
+        return res
+            .status(500)
+            .json({ error: error.message })
+
+    }
+})
+
 module.exports = userRouter;
