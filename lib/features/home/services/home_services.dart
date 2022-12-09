@@ -69,7 +69,11 @@ class HomeServices {
           'x-auth-token': userProvider.getUser.token,
         },
       );
-      product = jsonDecode(res.body)['product'];
+      product = Product.fromJson(
+        jsonEncode(
+          jsonDecode(res.body)['product'],
+        ),
+      );
 
       responseHandler(
         response: res,

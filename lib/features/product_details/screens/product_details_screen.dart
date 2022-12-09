@@ -37,8 +37,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     double totalRating = 0;
     for (int i = 0; i < widget.product.ratingsList!.length; i++) {
       totalRating = totalRating + widget.product.ratingsList![i].rating;
-      print(user.id);
-      print(widget.product.ratingsList![i].userId);
       if (widget.product.ratingsList![i].userId == user.id) {
         userRating = widget.product.ratingsList![i].rating;
       }
