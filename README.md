@@ -51,6 +51,6 @@ The objective is to make a shopping app like Amazon app with frontend using Flut
 - MongoDB
 - NodeJs
 
-# TODO: 
+# Update 
 
-well... to complete the app!
+ I will get back to this project sometime later.
